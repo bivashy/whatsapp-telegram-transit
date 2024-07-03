@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>whatsapp-telegram-transit-java</artifactId>
+        <groupId>io.github.bivashy</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>whatsapp-telegram-transcoder</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>whatsapp-telegram-transcoder</name>
+    <url>https://github.com/bivashy/whatsapp-telegram-transcoder</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>${java-build.version}</maven.compiler.source>
+        <maven.compiler.target>${java-build.version}</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+</project>
