@@ -2,6 +2,7 @@ package io.github.bivashy.telegram.bot;
 
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
+import io.github.bivashy.telegram.bot.listener.MessageUpdateListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,11 @@ import java.util.List;
 public class TelegramBotUpdatesListener implements UpdatesListener {
 
     private static final Logger log = LoggerFactory.getLogger(TelegramBotUpdatesListener.class);
+    private final MessageUpdateListener messageUpdateListener;
+
+    public TelegramBotUpdatesListener(MessageUpdateListener messageUpdateListener) {
+        this.messageUpdateListener = messageUpdateListener;
+    }
 
     @Override
     public int process(List<Update> updates) {
@@ -25,6 +31,8 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     }
 
     void onUpdate(Update update) {
+        if (update.message() != null)
+            messageUpdateListener.onMessageUpdate(update);
         log.debug("New update {}", update);
     }
 
