@@ -6,7 +6,9 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
-        <junit.version>4.11</junit.version>
+        <picocli.version>4.7.6</picocli.version>
+        <telegram-bot-api.version>7.4.0</telegram-bot-api.version>
+        <spring-boot-starter-parent.version>3.3.1</spring-boot-starter-parent.version>
 
         <java-build.version>17</java-build.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,10 +28,21 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
+                <groupId>info.picocli</groupId>
+                <artifactId>picocli</artifactId>
+                <version>${picocli.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pengrad</groupId>
+                <artifactId>java-telegram-bot-api</artifactId>
+                <version>${telegram-bot-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot-starter-parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
