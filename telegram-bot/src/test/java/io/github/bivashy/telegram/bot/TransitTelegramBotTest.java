@@ -24,13 +24,10 @@ public class TransitTelegramBotTest {
 
     @Test
     void testStartup() {
-        // Given
         doNothing().when(telegramBot).setUpdatesListener(any(TelegramBotUpdatesListener.class));
 
-        // When
         ReflectionTestUtils.invokeMethod(transitTelegramBot, "start");
 
-        // Then
         verify(telegramBot).setUpdatesListener(updatesListener);
     }
 
