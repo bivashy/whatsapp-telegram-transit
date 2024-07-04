@@ -24,7 +24,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         return UpdatesListener.CONFIRMED_UPDATES_ALL;
     }
 
-    private void onUpdate(Update update) {
+    void onUpdate(Update update) {
         log.debug("New update {}", update);
     }
 
