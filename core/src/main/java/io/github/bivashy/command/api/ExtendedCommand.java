@@ -1,7 +1,7 @@
 package io.github.bivashy.command.api;
 
-public interface ExtendedCommand {
+public interface ExtendedCommand<T extends Actor> {
 
-    Actor actor();
+    T actor();
 
 }
