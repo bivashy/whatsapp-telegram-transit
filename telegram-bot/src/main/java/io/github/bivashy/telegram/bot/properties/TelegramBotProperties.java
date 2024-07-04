@@ -1,4 +1,4 @@
-package io.github.bivashy.properties;
+package io.github.bivashy.telegram.bot.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package io.github.bivashy.configuration;
+package io.github.bivashy.telegram.bot.configuration;
 
 import com.pengrad.telegrambot.TelegramBot;
-import io.github.bivashy.properties.TelegramBotProperties;
+import io.github.bivashy.telegram.bot.properties.TelegramBotProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

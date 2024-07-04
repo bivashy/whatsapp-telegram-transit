@@ -1,4 +1,4 @@
-package io.github.bivashy;
+package io.github.bivashy.telegram.bot;
 
 import com.pengrad.telegrambot.TelegramBot;
 import jakarta.annotation.PostConstruct;

@@ -1,4 +1,4 @@
-package io.github.bivashy;
+package io.github.bivashy.telegram.bot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
