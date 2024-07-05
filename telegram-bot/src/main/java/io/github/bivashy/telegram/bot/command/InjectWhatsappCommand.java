@@ -12,7 +12,7 @@ public record InjectWhatsappCommand(TelegramActor actor) implements Runnable, Ex
     @Override
     public void run() {
         Chat chat = actor.chat();
-        if (chat.type() != Type.supergroup) {
+        if (chat == null || chat.type() != Type.supergroup) {
             actor.reply("Inject command could be executed only in supergroup!");
             return;
         }
