@@ -3,7 +3,7 @@ package io.github.bivashy.wttj.telegram.bot.listener;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
-import io.github.bivashy.wttj.telegram.bot.command.CommandLineFactory;
+import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

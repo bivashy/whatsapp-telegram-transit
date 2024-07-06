@@ -1,6 +1,6 @@
 package io.github.bivashy.wttj.telegram.bot.command.telegram;
 
-import io.github.bivashy.wttj.telegram.bot.command.CommandLineFactory;
+import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.MainCommand;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;

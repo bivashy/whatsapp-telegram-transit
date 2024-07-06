@@ -5,7 +5,7 @@ import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Chat.Type;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
-import io.github.bivashy.wttj.telegram.bot.command.CommandLineFactory;
+import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.MainCommand;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
