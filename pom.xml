@@ -30,6 +30,17 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>io.github.bivashy.whatsapp-telegram-transit-java</groupId>
+                <artifactId>core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.bivashy.whatsapp-telegram-transit-java</groupId>
+                <artifactId>database</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>info.picocli</groupId>
                 <artifactId>picocli</artifactId>
                 <version>${picocli.version}</version>
@@ -45,11 +56,6 @@
                 <version>${spring-boot-starter-parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.github.bivashy.whatsapp-telegram-transit-java</groupId>
-                <artifactId>core</artifactId>
-                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.ebean</groupId>
