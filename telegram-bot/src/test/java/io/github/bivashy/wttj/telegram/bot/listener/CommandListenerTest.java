@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Chat.Type;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
+import io.github.bivashy.wttj.api.command.interactive.InteractiveCommandExtension;
 import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.MainCommand;
@@ -38,6 +39,8 @@ public class CommandListenerTest {
     private CommandLineFactory<TelegramActor> commandLineFactory;
     @Mock
     private TelegramBot bot;
+    @Mock
+    private InteractiveCommandExtension<TelegramActor> interactiveCommandExtension;
 
     @Test
     void testOnInvalidUpdate() {
