@@ -11,6 +11,7 @@
         <ebean-migration.version>14.1.0</ebean-migration.version>
         <telegram-bot-api.version>7.4.0</telegram-bot-api.version>
         <cobalt.version>0.0.5</cobalt.version>
+        <postgresql-driver.version>42.7.3</postgresql-driver.version>
         <spring-boot-starter-parent.version>3.3.1</spring-boot-starter-parent.version>
 
         <java-build.version>17</java-build.version>
@@ -77,6 +78,11 @@
                 <groupId>com.github.auties00</groupId>
                 <artifactId>cobalt</artifactId>
                 <version>${cobalt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql-driver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
