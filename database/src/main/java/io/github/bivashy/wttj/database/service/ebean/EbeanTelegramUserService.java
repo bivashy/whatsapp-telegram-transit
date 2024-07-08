@@ -6,6 +6,8 @@ import io.github.bivashy.wttj.database.domain.query.QDTelegramUser;
 import io.github.bivashy.wttj.database.model.TelegramUser;
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 public class EbeanTelegramUserService implements TelegramUserService {
@@ -14,6 +16,14 @@ public class EbeanTelegramUserService implements TelegramUserService {
 
     public EbeanTelegramUserService(Database database) {
         this.database = database;
+    }
+
+    @Override
+    public List<? extends TelegramUser> all(boolean fetchSessions) {
+        QDTelegramUser query = new QDTelegramUser();
+        if (fetchSessions)
+            query = query.sessions.fetchCache();
+        return query.findList();
     }
 
     @Override

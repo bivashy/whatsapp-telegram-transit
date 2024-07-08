@@ -2,8 +2,11 @@ package io.github.bivashy.wttj.database.service.ebean;
 
 import io.ebean.Database;
 import io.github.bivashy.wttj.database.domain.DWhatsappSession;
+import io.github.bivashy.wttj.database.domain.query.QDWhatsappSession;
 import io.github.bivashy.wttj.database.model.WhatsappSession;
 import io.github.bivashy.wttj.database.service.WhatsappSessionService;
+
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
@@ -13,6 +16,11 @@ public class EbeanWhatsappSessionService implements WhatsappSessionService {
 
     public EbeanWhatsappSessionService(Database database) {
         this.database = database;
+    }
+
+    @Override
+    public List<? extends WhatsappSession> all() {
+        return new QDWhatsappSession().findList();
     }
 
     @Override
