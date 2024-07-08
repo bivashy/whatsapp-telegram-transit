@@ -7,6 +7,7 @@ import io.github.bivashy.wttj.database.model.TelegramUser;
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
@@ -32,11 +33,11 @@ public class EbeanTelegramUserService implements TelegramUserService {
     }
 
     @Override
-    public TelegramUser find(long userId, boolean fetchSessions) {
+    public Optional<TelegramUser> find(long userId, boolean fetchSessions) {
         QDTelegramUser query = userId(userId);
         if (fetchSessions)
             query = query.sessions.fetchCache();
-        return query.findOne();
+        return Optional.ofNullable(query.findOne());
     }
 
     @Override
