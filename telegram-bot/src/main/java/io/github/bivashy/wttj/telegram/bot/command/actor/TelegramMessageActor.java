@@ -4,8 +4,9 @@ import com.pengrad.telegrambot.Callback;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Update;
+import com.pengrad.telegrambot.request.BaseRequest;
 import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.SendResponse;
+import com.pengrad.telegrambot.response.BaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,18 +24,23 @@ public record TelegramMessageActor(Update update, TelegramBot bot) implements Te
     @Override
     public void reply(String message) {
         SendMessage sendMessage = new SendMessage(chatId(), message);
-        bot.execute(sendMessage, new Callback<SendMessage, SendResponse>() {
+        execute(sendMessage);
+    }
+
+    @Override
+    public <T extends BaseRequest<T, R>, R extends BaseResponse> void execute(T request) {
+        bot.execute(request, new Callback<T, R>() {
             @Override
-            public void onResponse(SendMessage sendMessage, SendResponse response) {
+            public void onResponse(T baseRequest, R response) {
                 if (response.isOk())
                     return;
-                log.warn("Sending message to '{}', with text '{}' failed, error-code '{}', description '{}'", chatId(), message, response.errorCode(),
+                log.warn("Executing request failed, chatId '{}', error-code '{}', description '{}'", chatId(), response.errorCode(),
                         response.description());
             }
 
             @Override
-            public void onFailure(SendMessage sendMessage, IOException e) {
-                log.warn("Sending message was failed due to IOException", e);
+            public void onFailure(T sendMessage, IOException e) {
+                log.warn("Executing request was failed due to IOException", e);
             }
         });
     }

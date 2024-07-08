@@ -10,6 +10,7 @@
         <picocli.version>4.7.6</picocli.version>
         <ebean-migration.version>14.1.0</ebean-migration.version>
         <telegram-bot-api.version>7.4.0</telegram-bot-api.version>
+        <cobalt.version>0.0.5</cobalt.version>
         <spring-boot-starter-parent.version>3.3.1</spring-boot-starter-parent.version>
 
         <java-build.version>17</java-build.version>
@@ -71,6 +72,11 @@
                 <groupId>io.ebean</groupId>
                 <artifactId>ebean-migration</artifactId>
                 <version>${ebean-migration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.auties00</groupId>
+                <artifactId>cobalt</artifactId>
+                <version>${cobalt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

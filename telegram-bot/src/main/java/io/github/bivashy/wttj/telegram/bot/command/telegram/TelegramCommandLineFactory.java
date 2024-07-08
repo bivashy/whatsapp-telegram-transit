@@ -1,6 +1,8 @@
 package io.github.bivashy.wttj.telegram.bot.command.telegram;
 
+import io.github.bivashy.wttj.database.service.TelegramUserService;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
+import io.github.bivashy.wttj.telegram.bot.command.LinkQrWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.LinkStartWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.MainCommand;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
@@ -14,9 +16,11 @@ import picocli.CommandLine;
 public class TelegramCommandLineFactory implements CommandLineFactory<TelegramActor> {
 
     private final InteractiveTelegramDefaultProvider interactiveTelegramDefaultProvider;
+    private final TelegramUserService userService;
 
-    public TelegramCommandLineFactory(InteractiveTelegramDefaultProvider interactiveTelegramDefaultProvider) {
+    public TelegramCommandLineFactory(InteractiveTelegramDefaultProvider interactiveTelegramDefaultProvider, TelegramUserService userService) {
         this.interactiveTelegramDefaultProvider = interactiveTelegramDefaultProvider;
+        this.userService = userService;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class TelegramCommandLineFactory implements CommandLineFactory<TelegramAc
         return new CommandLine(new MainCommand(actor))
                 .addSubcommand(new InjectWhatsappCommand(actor))
                 .addSubcommand(new LinkStartWhatsappCommand(actor))
+                .addSubcommand(new LinkQrWhatsappCommand(actor, userService))
                 .setExecutionExceptionHandler(new ExecutionExceptionHandler())
                 .setParameterExceptionHandler(new ParameterExceptionHandler())
                 .setDefaultValueProvider(interactiveTelegramDefaultProvider);
