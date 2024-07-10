@@ -4,6 +4,7 @@ import io.github.bivashy.wttj.database.model.TelegramUser;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface TelegramUserService {
 
@@ -20,6 +21,8 @@ public interface TelegramUserService {
     }
 
     Optional<TelegramUser> find(long userId, boolean fetchSessions);
+
+    void createOrAppend(long id, UUID sessionUniqueId);
 
     void save(TelegramUser user);
 
