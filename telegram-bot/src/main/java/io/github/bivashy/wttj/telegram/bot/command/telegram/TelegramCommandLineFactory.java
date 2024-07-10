@@ -2,6 +2,7 @@ package io.github.bivashy.wttj.telegram.bot.command.telegram;
 
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
+import io.github.bivashy.wttj.telegram.bot.command.LinkPairWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.LinkQrWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.LinkStartWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.ListWhatsappConnectionCommand;
@@ -35,6 +36,7 @@ public class TelegramCommandLineFactory implements CommandLineFactory<TelegramAc
                 .addSubcommand(new InjectWhatsappCommand(actor))
                 .addSubcommand(new LinkStartWhatsappCommand(actor))
                 .addSubcommand(new LinkQrWhatsappCommand(actor, userService, connectionService))
+                .addSubcommand(new LinkPairWhatsappCommand(actor, userService, connectionService))
                 .addSubcommand(new ListWhatsappConnectionCommand(actor, userService, connectionService))
                 .setExecutionExceptionHandler(new ExecutionExceptionHandler())
                 .setParameterExceptionHandler(new ParameterExceptionHandler())
