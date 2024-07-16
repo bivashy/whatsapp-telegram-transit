@@ -1,6 +1,5 @@
 package io.github.bivashy.wttj.telegram.bot.command.service;
 
-import io.github.bivashy.wttj.database.model.WhatsappSession;
 import io.github.bivashy.wttj.database.service.WhatsappSessionService;
 import it.auties.whatsapp.api.Whatsapp;
 import jakarta.annotation.PostConstruct;
@@ -27,19 +26,19 @@ public class WhatsappConnectionService {
 
     @PostConstruct
     void initConnections() {
-        // TODO: This is bad practise, we need to load connections using rate limiting.
-        for (WhatsappSession whatsappSession : sessionService.all()) {
+        sessionService.each(whatsappSession -> {
             UUID sessionUniqueId = whatsappSession.getSessionUniqueId();
             Optional<Whatsapp> whatsappOptional = Whatsapp.webBuilder()
                     .newConnection(sessionUniqueId)
                     .registered();
             if (whatsappOptional.isEmpty()) {
                 log.warn("Session with UID {} not found", sessionUniqueId);
-                continue;
+                return;
             }
             Whatsapp whatsapp = whatsappOptional.get();
+            // TODO: Rate limiting
             connect(sessionUniqueId, whatsapp);
-        }
+        });
     }
 
     CompletableFuture<Whatsapp> connect(UUID sessionUniqueId, Whatsapp whatsapp) {
