@@ -13,6 +13,7 @@
         <cobalt.version>0.0.5</cobalt.version>
         <postgresql-driver.version>42.7.3</postgresql-driver.version>
         <spring-boot-starter-parent.version>3.3.1</spring-boot-starter-parent.version>
+        <resilience4j.version>2.2.0</resilience4j.version>
 
         <java-build.version>21</java-build.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -83,6 +84,16 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-ratelimiter</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-retry</artifactId>
+                <version>${resilience4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
