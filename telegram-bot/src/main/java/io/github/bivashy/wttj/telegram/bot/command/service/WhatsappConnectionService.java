@@ -44,7 +44,7 @@ public class WhatsappConnectionService {
     CompletableFuture<Whatsapp> connect(UUID sessionUniqueId, Whatsapp whatsapp) {
         return whatsapp.connect().whenComplete(((connection, throwable) -> {
             if (throwable != null) {
-                log.error("Couldn't connect to session " + sessionUniqueId, throwable);
+                log.error("Couldn't connect to session {}", sessionUniqueId, throwable);
                 return;
             }
             whatsappConnections.put(sessionUniqueId, whatsapp);
