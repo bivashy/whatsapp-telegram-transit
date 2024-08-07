@@ -3,6 +3,7 @@ package io.github.bivashy.wttj.telegram.bot.command;
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
 import io.github.bivashy.wttj.telegram.bot.command.service.WhatsappConnectionService;
+import it.auties.whatsapp.api.ErrorHandler;
 import it.auties.whatsapp.api.WebOptionsBuilder;
 import it.auties.whatsapp.api.Whatsapp;
 import picocli.CommandLine.Command;
@@ -15,8 +16,9 @@ public class LinkPairWhatsappCommand extends LinkWhatsappCommand {
     private long number;
 
     public LinkPairWhatsappCommand(TelegramActor actor, TelegramUserService userService,
-                                   WhatsappConnectionService connectionService) {
-        super(actor, userService, connectionService);
+                                   WhatsappConnectionService connectionService,
+                                   ErrorHandler errorHandler) {
+        super(actor, userService, connectionService, errorHandler);
     }
 
     @Override

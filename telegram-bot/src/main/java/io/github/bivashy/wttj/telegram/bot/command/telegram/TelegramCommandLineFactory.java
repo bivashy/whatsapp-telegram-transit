@@ -12,6 +12,7 @@ import io.github.bivashy.wttj.telegram.bot.command.exception.ExecutionExceptionH
 import io.github.bivashy.wttj.telegram.bot.command.exception.ParameterExceptionHandler;
 import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.service.WhatsappConnectionService;
+import it.auties.whatsapp.api.ErrorHandler;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine;
 
@@ -21,13 +22,16 @@ public class TelegramCommandLineFactory implements CommandLineFactory<TelegramAc
     private final InteractiveTelegramDefaultProvider interactiveTelegramDefaultProvider;
     private final TelegramUserService userService;
     private final WhatsappConnectionService connectionService;
+    private final ErrorHandler errorHandler;
 
     public TelegramCommandLineFactory(InteractiveTelegramDefaultProvider interactiveTelegramDefaultProvider,
                                       TelegramUserService userService,
-                                      WhatsappConnectionService connectionService) {
+                                      WhatsappConnectionService connectionService,
+                                      ErrorHandler errorHandler) {
         this.interactiveTelegramDefaultProvider = interactiveTelegramDefaultProvider;
         this.userService = userService;
         this.connectionService = connectionService;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -35,8 +39,8 @@ public class TelegramCommandLineFactory implements CommandLineFactory<TelegramAc
         return new CommandLine(new MainCommand(actor))
                 .addSubcommand(new InjectWhatsappCommand(actor))
                 .addSubcommand(new LinkStartWhatsappCommand(actor))
-                .addSubcommand(new LinkQrWhatsappCommand(actor, userService, connectionService))
-                .addSubcommand(new LinkPairWhatsappCommand(actor, userService, connectionService))
+                .addSubcommand(new LinkQrWhatsappCommand(actor, userService, connectionService, errorHandler))
+                .addSubcommand(new LinkPairWhatsappCommand(actor, userService, connectionService, errorHandler))
                 .addSubcommand(new ListWhatsappConnectionCommand(actor, userService, connectionService))
                 .setExecutionExceptionHandler(new ExecutionExceptionHandler())
                 .setParameterExceptionHandler(new ParameterExceptionHandler())

@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.request.SendPhoto;
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
 import io.github.bivashy.wttj.telegram.bot.command.service.WhatsappConnectionService;
+import it.auties.whatsapp.api.ErrorHandler;
 import it.auties.whatsapp.api.QrHandler;
 import it.auties.whatsapp.api.WebOptionsBuilder;
 import it.auties.whatsapp.api.Whatsapp;
@@ -13,8 +14,9 @@ import picocli.CommandLine.Command;
 public class LinkQrWhatsappCommand extends LinkWhatsappCommand {
 
     public LinkQrWhatsappCommand(TelegramActor actor, TelegramUserService userService,
-                                 WhatsappConnectionService connectionService) {
-        super(actor, userService, connectionService);
+                                 WhatsappConnectionService connectionService,
+                                 ErrorHandler errorHandler) {
+        super(actor, userService, connectionService, errorHandler);
     }
 
     @Override

@@ -4,6 +4,7 @@ import io.github.bivashy.wttj.api.command.ExtendedCommand;
 import io.github.bivashy.wttj.database.service.TelegramUserService;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
 import io.github.bivashy.wttj.telegram.bot.command.service.WhatsappConnectionService;
+import it.auties.whatsapp.api.ErrorHandler;
 import it.auties.whatsapp.api.WebOptionsBuilder;
 import it.auties.whatsapp.api.Whatsapp;
 import it.auties.whatsapp.model.message.model.MessageContainer;
@@ -24,11 +25,13 @@ public abstract class LinkWhatsappCommand implements Runnable, ExtendedCommand<T
     private final TelegramActor actor;
     private final TelegramUserService userService;
     private final WhatsappConnectionService connectionService;
+    private final ErrorHandler errorHandler;
 
-    public LinkWhatsappCommand(TelegramActor actor, TelegramUserService userService, WhatsappConnectionService connectionService) {
+    public LinkWhatsappCommand(TelegramActor actor, TelegramUserService userService, WhatsappConnectionService connectionService, ErrorHandler errorHandler) {
         this.actor = actor;
         this.userService = userService;
         this.connectionService = connectionService;
+        this.errorHandler = errorHandler;
     }
 
     @Override
@@ -36,7 +39,8 @@ public abstract class LinkWhatsappCommand implements Runnable, ExtendedCommand<T
         UUID sessionUniqueId = UUID.randomUUID();
 
         Whatsapp whatsapp = extend(Whatsapp.webBuilder()
-                .newConnection(sessionUniqueId), actor);
+                .newConnection(sessionUniqueId)
+                .errorHandler(errorHandler), actor);
 
         CompletableFuture<Void> loginFuture = new CompletableFuture<>();
         whatsapp.addLoggedInListener(() -> {
