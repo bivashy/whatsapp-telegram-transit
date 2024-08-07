@@ -1,6 +1,10 @@
 package io.github.bivashy.wttj.telegram.bot.command.service;
 
 import io.github.bivashy.wttj.database.service.WhatsappSessionService;
+import io.github.resilience4j.ratelimiter.RateLimiter;
+import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
+import io.github.resilience4j.retry.Retry;
+import io.github.resilience4j.retry.RetryRegistry;
 import it.auties.whatsapp.api.Whatsapp;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -19,9 +23,13 @@ public class WhatsappConnectionService {
     private static final Logger log = LoggerFactory.getLogger(WhatsappConnectionService.class);
     private final Map<UUID, Whatsapp> whatsappConnections = new HashMap<>();
     private final WhatsappSessionService sessionService;
+    private final RateLimiter rateLimiter;
+    private final Retry retry;
 
-    public WhatsappConnectionService(WhatsappSessionService sessionService) {
+    public WhatsappConnectionService(WhatsappSessionService sessionService, RateLimiterRegistry rateLimiterRegistry, RetryRegistry retryRegistry) {
         this.sessionService = sessionService;
+        this.rateLimiter = rateLimiterRegistry.rateLimiter("whatsapp-connection");
+        this.retry = retryRegistry.retry("whatsapp-connection");
     }
 
     @PostConstruct
@@ -36,8 +44,7 @@ public class WhatsappConnectionService {
                 return;
             }
             Whatsapp whatsapp = whatsappOptional.get();
-            // TODO: Rate limiting
-            connect(sessionUniqueId, whatsapp);
+            RateLimiter.decorateRunnable(rateLimiter, Retry.decorateRunnable(retry, () -> connect(sessionUniqueId, whatsapp))).run();
         });
     }
 
