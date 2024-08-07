@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,6 +23,13 @@ public class DTelegramUser extends BaseDomain implements TelegramUser {
 
     public DTelegramUser(long userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public void addSession(WhatsappSession session) {
+        if (sessions == null)
+            sessions = new ArrayList<>();
+        sessions.add((DWhatsappSession) session);
     }
 
     @Override

@@ -5,13 +5,15 @@ import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Chat.Type;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.model.Update;
-import io.github.bivashy.wttj.telegram.bot.command.CommandLineFactory;
+import io.github.bivashy.wttj.api.command.interactive.InteractiveCommandExtension;
+import io.github.bivashy.wttj.telegram.bot.command.factory.CommandLineFactory;
 import io.github.bivashy.wttj.telegram.bot.command.InjectWhatsappCommand;
 import io.github.bivashy.wttj.telegram.bot.command.MainCommand;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramActor;
 import io.github.bivashy.wttj.telegram.bot.command.actor.TelegramMessageActor;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,6 +23,7 @@ import picocli.CommandLine;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,6 +41,10 @@ public class CommandListenerTest {
     private CommandLineFactory<TelegramActor> commandLineFactory;
     @Mock
     private TelegramBot bot;
+    @Mock
+    private InteractiveCommandExtension<TelegramActor> interactiveCommandExtension;
+    @Mock
+    private ExecutorService executorService;
 
     @Test
     void testOnInvalidUpdate() {
@@ -64,8 +71,7 @@ public class CommandListenerTest {
         CommandLine commandLine = createMockCommandLine(actor);
 
         when(commandLineFactory.create(any(TelegramActor.class))).thenReturn(commandLine);
-
-        commandListener.onCommand(update);
+        runCommand(update);
 
         verify(commandLine).execute(commandArgs);
         assertEquals(Arrays.asList(commandArgs), commandLine.getParseResult().unmatched());
@@ -81,8 +87,7 @@ public class CommandListenerTest {
         CommandLine commandLine = createMockCommandLine(actor);
 
         when(commandLineFactory.create(any(TelegramActor.class))).thenReturn(commandLine);
-
-        commandListener.onCommand(update);
+        runCommand(update);
 
         verify(commandLine).execute(commandArgs);
         verify(actor).reply("Inject command could be executed only in supergroup!");
@@ -101,11 +106,19 @@ public class CommandListenerTest {
         CommandLine commandLine = createMockCommandLine(actor);
 
         when(commandLineFactory.create(any(TelegramActor.class))).thenReturn(commandLine);
-
-        commandListener.onCommand(update);
+        runCommand(update);
 
         verify(commandLine).execute(commandArgs);
         verify(actor).reply("Please enable 'topics' in supergroup settings.");
+    }
+
+    private void runCommand(Update update) {
+        ArgumentCaptor<Runnable> executeCaptor = ArgumentCaptor.forClass(Runnable.class);
+
+        commandListener.onCommand(update);
+
+        verify(executorService).execute(executeCaptor.capture());
+        executeCaptor.getValue().run();
     }
 
     private Update createMessageUpdate(String command) {

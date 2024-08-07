@@ -10,9 +10,12 @@
         <picocli.version>4.7.6</picocli.version>
         <ebean-migration.version>14.1.0</ebean-migration.version>
         <telegram-bot-api.version>7.4.0</telegram-bot-api.version>
+        <cobalt.version>0.0.5</cobalt.version>
+        <postgresql-driver.version>42.7.3</postgresql-driver.version>
         <spring-boot-starter-parent.version>3.3.1</spring-boot-starter-parent.version>
+        <resilience4j.version>2.2.0</resilience4j.version>
 
-        <java-build.version>17</java-build.version>
+        <java-build.version>21</java-build.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>${java-build.version}</maven.compiler.source>
         <maven.compiler.target>${java-build.version}</maven.compiler.target>
@@ -71,6 +74,31 @@
                 <groupId>io.ebean</groupId>
                 <artifactId>ebean-migration</artifactId>
                 <version>${ebean-migration.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.auties00</groupId>
+                <artifactId>cobalt</artifactId>
+                <version>${cobalt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-ratelimiter</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-retry</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-spring-boot3</artifactId>
+                <version>${resilience4j.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

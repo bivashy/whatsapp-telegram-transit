@@ -6,6 +6,8 @@ public interface TelegramUser {
 
     long getUserId();
 
+    void addSession(WhatsappSession session);
+
     List<WhatsappSession> getSessions();
 
 }
